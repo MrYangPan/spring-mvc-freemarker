@@ -11,6 +11,7 @@
        http://www.springframework.org/schema/context/spring-context.xsd">
 
     <context:annotation-config/>
+    <!--<mvc:default-servlet-handler/>-->
 
     <!-- 配置包扫描器 -->
     <context:component-scan base-package="com.springmvc.controller"/>
@@ -32,14 +33,14 @@
 
     <!-- 创建freeMakerConfig对象,并相关属性进行配置 -->
     <bean id="freemarkerConfig" class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
-        <!-- 模板加载路径 -->
-        <property name="templateLoaderPath" value="/WEB-INF/views"/>
+        <!-- freemarker 模板加载路径 -->
+        <property name="templateLoaderPath" value="/WEB-INF/views/ftlTemplate"/>
 
         <!-- 设置页面中文乱码问题   方式：1-->
         <!--<property name="freemarkerSettings">-->
-            <!--<props>-->
-                <!--<prop key="defaultEncoding">UTF-8</prop>-->
-            <!--</props>-->
+        <!--<props>-->
+        <!--<prop key="defaultEncoding">UTF-8</prop>-->
+        <!--</props>-->
         <!--</property>-->
 
         <!-- 设置页面中文乱码问题  方式：2  引用配置文件的方式 -->

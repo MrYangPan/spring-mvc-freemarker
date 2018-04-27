@@ -7,8 +7,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -21,28 +19,27 @@ public class IndexController {
     @Autowired
     private UserServiceImpl userService;
 
-    @RequestMapping("/helloworld")
-    public ModelAndView helloWorld() {
+    @RequestMapping("/userlist")
+    public ModelAndView helloWorld(Integer offset, Integer limit) {
+        offset = offset == null ? 0 : offset;//默认便宜0
+        limit = limit == null ? 50 : limit;//默认展示50条
         ModelAndView mv = new ModelAndView("ftl/hello");
-        mv.addObject("words", "hello你好,world!世界!");
-        mv.addObject("userList", getUserList());
+        mv.addObject("headObj", "用户列表");
+        List<User> userList = userService.getUserList(offset, limit);
+        mv.addObject("userList", userList);
         return mv;
     }
 
-    public List<User> prepareUserList() {
-        List<User> list = new ArrayList<>();
-        for (int i = 0; i < 5; i++) {
-            User item = new User();
-            item.setUserName("用户" + i);
-            item.setCreateTime(new Date());
-            list.add(item);
-        }
-        return list;
-    }
-
-    public List<User> getUserList() {
-        return userService.getUserList(0, 5);
-    }
+//    public List<User> prepareUserList() {
+//        List<User> list = new ArrayList<>();
+//        for (int i = 0; i < 5; i++) {
+//            User item = new User();
+//            item.setUserName("用户" + i);
+//            item.setCreateTime(new Date());
+//            list.add(item);
+//        }
+//        return list;
+//    }
 
 
 }
